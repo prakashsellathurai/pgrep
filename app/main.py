@@ -9,6 +9,8 @@ def match_pattern(input_line, pattern):
         return pattern in input_line
     elif pattern == r"\d":
         return any(char.isdigit() for char in input_line)
+    elif pattern == "\w":
+        return any(p.isalnum() or p == "_" for p in input_line)   
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 

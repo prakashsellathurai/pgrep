@@ -10,7 +10,9 @@ def match_pattern(input_line, pattern):
     elif pattern == r"\d":
         return any(char.isdigit() for char in input_line)
     elif pattern == "\w":
-        return any(p.isalnum() or p == "_" for p in input_line)   
+        return any(p.isalnum() or p == "_" for p in input_line) 
+    elif pattern.startswith("[^") and pattern.endswith("]"):
+        return any(not char in input_line for char in pattern[2:-1])  
     elif pattern.startswith("[") and pattern.endswith("]"):
         return any(char in input_line for char in pattern[1:-1])
     else:

@@ -48,7 +48,7 @@ def match_here(input_line, pattern):
         return False
 
     if pattern.startswith(r'\w'):
-        if input_line and input_line[0].isalnum() or   input_line[0] == '_':
+        if input_line and (input_line[0].isalnum() or   input_line[0] == '_'):
             return match_here(input_line[1:], pattern[2:])
         return False
 

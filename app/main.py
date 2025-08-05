@@ -12,6 +12,17 @@ def match_star(input_line, pattern, c):
         i+=1
     return False
 
+def match_plus(input_line, pattern, c):
+    i = 0
+    # Require at least one match
+    if i >= len(input_line) or (input_line[i] != c and c != '.'):
+        return False
+    while i < len(input_line) and (input_line[i] == c or c == '.'):
+        i += 1
+        if match_here(input_line[i:], pattern):
+            return True
+    return False
+
 
 def match_here(input_line, pattern):
     if not pattern:
@@ -26,7 +37,7 @@ def match_here(input_line, pattern):
         return match_star(input_line, pattern[2:], pattern[0])
 
     if len(pattern) >= 2 and pattern[1] == '+':
-        return match_star(input_line, pattern[2:], pattern[0])
+        return match_plus(input_line, pattern[2:], pattern[0])
 
 
  # ─── Escape Sequences ───────────────────────

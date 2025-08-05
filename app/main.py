@@ -23,6 +23,20 @@ def match_plus(input_line, pattern, c):
             return True
     return False
 
+def match_char(char, pattern):
+    if pattern == r'\d':
+        return char.isdigit()
+    elif pattern == r'\w':
+        return char.isalnum() or c == '_'
+    else:
+        return char == pattern
+
+def match_optional(input_line, char_pattern, rest):
+    if input_line and match_char(input_line[0], char_pattern):
+        if match_here(input_line[1:], rest):
+            return True
+    return match_here(input_line, rest)
+
 
 def match_here(input_line, pattern):
     if not pattern:
@@ -39,6 +53,8 @@ def match_here(input_line, pattern):
     if len(pattern) >= 2 and pattern[1] == '+':
         return match_plus(input_line, pattern[2:], pattern[0])
 
+    if len(pattern) >= 2 and pattern[1] == '?':
+        return match_optional(input_line, pattern[0], pattern[2:])
 
  # ─── Escape Sequences ───────────────────────
 

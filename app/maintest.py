@@ -1,4 +1,4 @@
-from main import match_pattern
+from .regex import match_pattern
 import unittest
 
 class TestStringMethods(unittest.TestCase):
